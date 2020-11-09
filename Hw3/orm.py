@@ -13,13 +13,14 @@ def from_request(attr):
 
 class Person:
     """класс записи"""
-    def __init__(self, id: int = None, name: str = None , age: int= None, email: str = None):
+    def __init__(self, id: int = None, name: str = None , age: int= None, email: str = None, phone: int = None):
         """создание"""
         self.id = id
         self.name = name
         self.age = age
         self.email = email
-        self.attr = ['id','name','age','email']
+        self.phone = phone
+        self.attr = ['id','name','age','email','phone']
 
     def active_attr(self):
         """метод получение активных атрибутов"""
@@ -115,7 +116,6 @@ class MyOrm(Person):
                 res += ')'
                 logger.debug('request add without id = %s',res)
                 self.cursor.execute(res)
-                self.connect.commit()
             else:
                 res = f'INSERT INTO {self.table_name} ('
                 res += ', '.join(attr)
@@ -161,7 +161,7 @@ class MyOrm(Person):
             res2 = per.request('AND')
             logger.debug('request update change  = %s', res2)
             self.cursor.execute(f"UPDATE {self.table_name} SET {res1} WHERE {res2}")
-            logger.info("update succesful ")
+            logger.info("update successfully ")
         except psycopg2.errors.UniqueViolation:
             logger.error("update Error : key is repeat")
         except psycopg2.errors.InvalidTextRepresentation:

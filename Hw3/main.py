@@ -6,7 +6,7 @@ if __name__ == "__main__":
     logging.info("Program started")
     a = MyOrm()
 
-    a.create(Person(name="qwert",age=1454, email="qweqwr@mail"))
+    a.create(Person(name="qwert",age=1454, email="qweqwr@mail",phone=9969234123))
     a.create(Person(id = 13,name="Arseny",age=13, email="qweqwr@mail"))
     a.create(Person(id =13))
     a.create(Person(id="sdgfsdg"))

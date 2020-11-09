@@ -8,8 +8,6 @@ class TicTacGame:
         self.query = 0
         self.game_over = False
         self.vs_comp = False
-        self.win_conditions = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 4, 8),
-                               (2, 4, 6), (0, 3, 6), (1, 4, 7), (2, 5, 8))
 
     def start_game(self) :
         """Метод запуска игры"""
@@ -36,16 +34,24 @@ class TicTacGame:
     def show_board(self):
         """Метод отрисовки игрового поля"""
         for row in range(3):
-            print ("| ",end=' ')
+            print("| ",end=' ')
             for col in range(3):
                 if self.mas[row][col] == 'X':
-                    print ("x",end=' ')
+                    print("x",end=' ')
                 elif self.mas[row][col] == 'O':
-                    print ("o",end=' ')
+                    print("o",end=' ')
                 else:
                     print (" ",end=' ')
             print(" |")
 
+    def get_poss(self):
+        try:
+            poss = input().split()
+            poss = [int(q) for q in poss]
+            self.filling_board(poss[0]-1, poss[1] - 1)
+            print("позиция ", poss[0] , poss[1])
+        except (IndexError, ValueError):
+            print('Неправильный формат ввода!')
 
     def event_handler(self):
         """Метод обратоки хода"""
@@ -55,24 +61,14 @@ class TicTacGame:
                 print('Ход игрока')
             else:
                 self.computer_move()
-            try:
-                input_row = int(input('Введите номер строки: '))
-                input_col = int(input('Введите номер столбца: '))
-                self.filling_board(input_row - 1, input_col - 1)
-            except (IndexError, ValueError):
-                print('Неправильный формат ввода!')
+            self.get_poss()
 
         else:
             if self.query % 2 == 0:
                 print('Ход 1 игрока')
             else:
                 print('Ход 2 игрока')
-            try:
-                input_row = int(input('Введите номер строки: '))
-                input_col = int(input('Введите номер столбца: '))
-                self.filling_board(input_row - 1, input_col - 1)
-            except (IndexError, ValueError):
-                print('Неправильный формат ввода!')
+            self.get_poss()
 
 
 
@@ -102,24 +98,16 @@ class TicTacGame:
     def computer_move(self):
         """Метод хода компбьтера"""
 
-        for n in range(3):
-            if self.can_win(self.mas[n][0], self.mas[n][1], self.mas[n][2], 'O'):
+        for char in ('O','X'):
+            for n in range(3):
+                if self.can_win(self.mas[n][0], self.mas[n][1], self.mas[n][2], char):
+                    return
+                if self.can_win(self.mas[0][n], self.mas[1][n], self.mas[2][n], char):
+                    return
+            if self.can_win(self.mas[0][0], self.mas[1][1], self.mas[2][2], char):
                 return
-            if self.can_win(self.mas[0][n], self.mas[1][n], self.mas[2][n], 'O'):
+            if self.can_win(self.mas[2][0], self.mas[1][1], self.mas[0][2], char):
                 return
-        if self.can_win(self.mas[0][0], self.mas[1][1], self.mas[2][2], 'O'):
-            return
-        if self.can_win(self.mas[2][0], self.mas[1][1], self.mas[0][2], 'O'):
-            return
-        for n in range(3):
-            if self.can_win(self.mas[n][0], self.mas[n][1], self.mas[n][2], 'X'):
-                return
-            if self.can_win(self.mas[0][n], self.mas[1][n], self.mas[2][n], 'X'):
-                return
-        if self.can_win(self.mas[0][0], self.mas[1][1], self.mas[2][2], 'X'):
-            return
-        if self.can_win(self.mas[2][0], self.mas[1][1], self.mas[0][2], 'X'):
-            return
         while True:
             row = randint(0, 2)
             col = randint(0, 2)

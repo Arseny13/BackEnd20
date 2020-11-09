@@ -1,20 +1,23 @@
 INFO:root:Program started
 INFO:App.Class :table MyTable create
-DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email) VALUES ( 'qwert' , 1454, 'qweqwr@mail' )
-DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email) VALUES ( 13, 'Arseny' , 13, 'qweqwr@mail' )
+DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email, phone) VALUES ( 'qwert' , 1454, 'qweqwr@mail' , 9969234123)
+DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email, phone) VALUES ( 13, 'Arseny' , 13, 'qweqwr@mail' , 'None' )
 INFO:App.Class :add Person
-DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email) VALUES ( 13, 'None' , 'None' , 'None' )
+DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email, phone) VALUES ( 13, 'None' , 'None' , 'None' , 'None' )
 ERROR:App.Class :error create: already ID
-DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email) VALUES ( 'sdgfsdg' , 'None' , 'None' , 'None' )
+DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email, phone) VALUES ( 'sdgfsdg' , 'None' , 'None' , 'None' , 'None' )
 ERROR:App.Class :error create: InvalidText
-DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email) VALUES ( 13, 'ssdgsadgsd' , 'None' , 'None' )
+DEBUG:App.Class :request add with id = INSERT INTO MyTable (id, name, age, email, phone) VALUES ( 13, 'ssdgsadgsd' , 'None' , 'None' , 'None' )
 ERROR:App.Class :error create: already ID
-DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email) VALUES ( 'Arseny' , 1454, '111111@mail' )
-DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email) VALUES ( 'Arseny' , 1454, 'aaaaaa@mail' )
+DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email, phone) VALUES ( 'Arseny' , 1454, '111111@mail' , 'None' )
+DEBUG:App.Class :request add without id = INSERT INTO MyTable (name, age, email, phone) VALUES ( 'Arseny' , 1454, 'aaaaaa@mail' , 'None' )
 DEBUG:App.Class :request get  = age = '1454';
 INFO:App.Class :get succesful 
-DEBUG:App.Class :request update get  = name = 'Maxim' , age = '666' 
+DEBUG:App.Class :request update get  = id = '666' , name = 'Maxim' , age = '666' 
 DEBUG:App.Class :request update change  = name = 'Arseny';
-INFO:App.Class :update succesful 
+ERROR:App.Class :update Error : key is repeat
+DEBUG:App.Class :request update get  = name = 'Maxim' , age = '666' 
+DEBUG:App.Class :request update change  = name = 'qwert';
+INFO:App.Class :update successfully 
 INFO:App.Class :table drop 
 INFO:root:Done!
